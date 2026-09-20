@@ -1,0 +1,38 @@
+25 images
+
+20 correctly classified
+
+5 wrong classified:
+ - cactus - honeycomb
+ - cat - schipperke
+ - cat on the wall - trilobite
+ - sea lion black&white - mink
+ - toucan - howler monkey
+
+
+correctly classified & faster lower confidence with lrp removement: 10
+ - rock crab
+ - hammerhead
+ - howler monkey
+ - common iguana
+ - sunglasses
+ - loggerhead (sea turtle)
+ - sea lion in boat
+ - sea lion smiling 
+ - spider monkey   
+ - volcano
+
+
+correctly classified & faster lower confidence with random removement: 8
+ - balloon
+ - canoe
+ - grocery store (mangos)
+ - pelican
+ - pizza 
+ - shoe shop
+ - plate (tacos)
+ - triumphal arch
+
+ same lower confidence development:
+ - sea lion underwater
+ - stingray

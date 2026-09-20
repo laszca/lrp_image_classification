@@ -1,19 +1,34 @@
+"""
+Interactive viewer for the results saved in explanations.pkl: shows the
+original image, its LRP relevance map, and its top predictions.
+"""
+
 import pickle
 import matplotlib.pyplot as plt
 
-with open("predictions.pkl", "rb") as f:
+with open("explanations.pkl", "rb") as f:
     images_data = pickle.load(f)
 
 
 def plot_results(images_data):
-    
-    # initial state -> start with the first image 
+    """
+    Opens an interactive matplotlib window showing one image at a time,
+    with its original image, LRP relevance map, and top predictions.
+    Press space to go to the next image, backspace to go back.
+
+    Args:
+        list[dict]: images_data
+            The results loaded from explanations.pkl, one dict per image.
+    """
+
+    # initial state -> start with the first image
     state = {"index": 0}
     
     # create a figure with 3 subplots: original image, relevance map, and top predictions
     fig, axes = plt.subplots(1, 3, figsize=(16, 6), gridspec_kw={'width_ratios': [1, 1, 1.2]})
     
     def draw():
+        """Redraws all three subplots for the currently selected image."""
         index = state["index"]
         image_data = images_data[index]
         
@@ -26,7 +41,7 @@ def plot_results(images_data):
         axes[0].axis("off")
         
         # plot relevance map
-       # axes[1].imshow(image_data["original_image"])
+        # axes[1].imshow(image_data["original_image"])
         axes[1].imshow(image_data["relevance_map"], cmap="hot") # seismic, alpha 0.5
         axes[1].set_title("Relevance Map")
         axes[1].axis("off")
@@ -44,6 +59,14 @@ def plot_results(images_data):
         fig.canvas.draw_idle()
         
     def on_key(event):
+        """
+        Advances to the next/previous image on space/backspace and
+        redraws the figure.
+
+        Args:
+            matplotlib.backend_bases.KeyEvent: event
+                The key press event.
+        """
         if event.key == " ":
             state["index"] = (state["index"] + 1) % len(images_data)
             draw()
@@ -55,7 +78,6 @@ def plot_results(images_data):
     draw()
     plt.show()
         
-    
     
 def main():
     plot_results(images_data)
